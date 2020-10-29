@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>
+  <div class="m-header">
     <el-row>
       <top-bar />
     </el-row>
@@ -24,5 +24,6 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang='scss'>
+@import "@/assets/css/public/header/index.scss";
 </style>

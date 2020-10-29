@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Index from '@/page'
 Vue.use(Router)
 
 export default new Router({
@@ -8,7 +8,13 @@ export default new Router({
     {
       path: '/',
       name: 'defaultPage',
-      component: () => import('@/layout/default')
+      component: () => import('@/layout/default'),
+      redirect: '/index',
+      children: [{
+        path: 'index',
+        name: 'index',
+        component: Index
+      }]
     },
     {
       path: '/blank',

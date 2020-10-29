@@ -2,23 +2,29 @@
 <template>
   <div class="layout-default">
     <el-container>
-      <el-header>
+      <el-header height=''>
         <my-header />
       </el-header>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+      <el-footer height=''>
+        <my-footer />
+      </el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
 import MyHeader from "@/components/header";
+import MyFooter from "@/components/footer";
 export default {
   data() {
     return {};
   },
   components: {
-    MyHeader
+    MyHeader,
+    MyFooter
   }
 };
 </script>
