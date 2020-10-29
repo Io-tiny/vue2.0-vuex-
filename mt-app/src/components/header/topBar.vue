@@ -1,16 +1,28 @@
 <!--  -->
 <template>
-  <div class="top-bar">
-    top
-  </div>
+  <el-row class="m-header m-header-topbar">
+    <el-col :span='10'>
+      <geo />
+    </el-col>
+    <el-col :span='14'>
+      <m-nav></m-nav>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
+import geo from "./geo";
+import MNav from "./nav";
 export default {
   data() {
     return {};
+  },
+  components: {
+    geo,
+    MNav
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
+@import "@/assets/css/public/header/topbar.scss";
 </style>

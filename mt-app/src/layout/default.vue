@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="page-default">
+  <div class="layout-default">
     <el-container>
       <el-header>
         <my-header />
