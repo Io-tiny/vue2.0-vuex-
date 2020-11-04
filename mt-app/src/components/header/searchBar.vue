@@ -20,6 +20,7 @@
             placeholder='请输入内容'
             @focus="focus"
             @blur="blur"
+            @input="input"
           ></el-input>
           <el-button
             type='primary'
@@ -36,15 +37,7 @@
             >
               <router-link :to="{name:'goods', params:{ name: item }}">{{ item }}</router-link>
             </dd>
-            <!-- <dd>
-              <router-link to="/s">999连锁旅馆</router-link>
-            </dd>
-            <dd>
-              <router-link to="/s">尚优客快捷酒店</router-link>
-            </dd>
-            <dd>
-              <router-link to="/s">7天连锁酒店</router-link>
-            </dd> -->
+
           </dl>
           <dl
             class="searchList"
@@ -56,12 +49,7 @@
             >
               <router-link :to="{name:'goods', params:{ name: item }}">{{ item }}</router-link>
             </dd>
-            <!-- <dd>
-              <router-link to="/s">火锅自助餐</router-link>
-            </dd>
-            <dd>
-              <router-link to="/s">火锅 重庆</router-link>
-            </dd> -->
+
           </dl>
         </div>
         <p class="suggest">
@@ -70,9 +58,7 @@
             v-for="(item, index) in searchList"
             :key="index"
           ></a>
-          <!-- <a href="#">999连锁旅馆</a>
-          <a href="#">尚优客快捷酒店</a>
-          <a href="#">7天连锁酒店</a> -->
+
         </p>
       </el-col>
     </el-row>
@@ -80,13 +66,14 @@
 </template>
 
 <script>
+import api from "@/api";
 export default {
   data() {
     return {
       searchWord: "",
       isFoucs: false,
-      hotPlaceList: ["京东第一度假村", "aa"],
-      searchList: ["aa", "bb"],
+      hotPlaceList: [],
+      searchList: [],
       suggestList: []
     };
   },
@@ -98,6 +85,12 @@ export default {
       return this.isFoucs && this.searchWord;
     }
   },
+  created() {
+    api.getSearchHotWorld().then(res => {
+      this.hotPlaceList = res.data.data;
+      this.suggestList = res.data.data;
+    });
+  },
   methods: {
     focus() {
       this.isFoucs = true;
@@ -106,6 +99,14 @@ export default {
       setTimeout(() => {
         this.isFoucs = false;
       }, 2000);
+    },
+    input() {
+      let val = this.searchWord;
+      api.getSearchList().then(res => {
+        this.searchList = res.data.data.list.filter((item, index) => {
+          return item.indexOf(val) > -1;
+        });
+      });
     }
   }
 };
